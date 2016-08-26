@@ -25,7 +25,6 @@ if (config.proxy && config.proxy.enabled) {
       host: 'http://172.25.48.34:1234/',
       map: function (path) {
         var result = path.split('/apis/')
-        console.log(result,'======');
         return '/' + result[1]
       }
     }))

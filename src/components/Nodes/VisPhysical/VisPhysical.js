@@ -122,7 +122,7 @@ var VisPhysical = React.createClass({
       getAllTasks()
       getNodeTimeout = setTimeout(function () {
         autoFetch()
-      }, 3000)
+      }, 10000)
     }
     autoFetch()
   },
