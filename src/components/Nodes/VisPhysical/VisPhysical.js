@@ -9,7 +9,7 @@ var TaskWrapper = React.createClass({
   propTypes: {
     data: React.PropTypes.object.isRequired
   },
-  render: function () {
+  render () {
     var data = this.props.data,
       statusColor = data.DesiredState === 'ready' ? '#777' : 'rgba(255,255,255,.15)',
       statusStyle = {
@@ -27,7 +27,7 @@ var NodeWrapper = React.createClass({
   propTypes: {
     data: React.PropTypes.object.isRequired
   },
-  render: function () {
+  render () {
     var statusColor = this.props.data.Status.State === 'ready' ? 'green' : 'red',
       statusStyle = {
         backgroundColor: statusColor
@@ -58,12 +58,12 @@ var SearchBar = React.createClass({
     onUserInput: React.PropTypes.func.isRequired,
     filterText: React.PropTypes.string.isRequired
   },
-  handleChange: function () {
+  handleChange () {
     this.props.onUserInput(
       this.refs.filterTextInput.value
     )
   },
-  render: function () {
+  render () {
     return (
       <form className={classes.searchFrom}>
         <input type='text' placeholder='输入节点名字' className='form-control'
@@ -78,7 +78,7 @@ var Nodes = React.createClass({
     visPhysical: React.PropTypes.object.isRequired,
     filterText: React.PropTypes.string.isRequired
   },
-  render: function () {
+  render () {
     var nodes = this.props.visPhysical.nodes, tasks = this.props.visPhysical.tasks, filterText = this.props.filterText
     return (
       <div>
@@ -96,40 +96,40 @@ var Nodes = React.createClass({
     )
   }
 })
-var getNodeTimeout
+let GetNodeTimeout
 var VisPhysical = React.createClass({
   propTypes: {
     visPhysical: React.PropTypes.object.isRequired,
     getAllTasks: React.PropTypes.func.isRequired,
     getAllNodes: React.PropTypes.func.isRequired
   },
-  getInitialState: function () {
+  getInitialState () {
     this.props.getAllTasks()
     this.props.getAllNodes()
     return {
       filterText: ''
     }
   },
-  handleUserInput: function (filterText) {
+  handleUserInput (filterText) {
     this.setState({
       filterText: filterText
     })
   },
-  componentDidMount: function () {
+  componentDidMount () {
     let {getAllNodes, getAllTasks} = this.props
     function autoFetch () {
       getAllNodes()
       getAllTasks()
-      getNodeTimeout = setTimeout(function () {
+      GetNodeTimeout = setTimeout(function () {
         autoFetch()
       }, 10000)
     }
     autoFetch()
   },
-  componentWillUnmount: function () {
-    clearTimeout(getNodeTimeout)
+  componentWillUnmount () {
+    clearTimeout(GetNodeTimeout)
   },
-  render: function () {
+  render () {
     return (
       <div>
         <SearchBar filterText={this.state.filterText}
