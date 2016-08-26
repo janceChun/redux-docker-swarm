@@ -1,0 +1,6 @@
+@import '../../styles/base';
+.activeRoute {
+  color: $blue-darker !important;
+  font-weight: bold;
+  text-decoration: underline;
+}
